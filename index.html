@@ -112,48 +112,32 @@ body{
 /* ── BIRTHDAY PANEL ── */
 .bday-panel{background:rgba(8,18,36,0.82);border:1px solid var(--b1);border-radius:var(--r);backdrop-filter:blur(22px);overflow:hidden;position:relative;}
 .bday-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);}
-.bp-header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 12px;border-bottom:1px solid var(--b1);}
+.bp-header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 14px;border-bottom:1px solid var(--b1);}
 .bp-nav{display:flex;align-items:center;gap:10px;}
 .bp-month{font-family:var(--fd);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--white);}
-.bp-btn{width:34px;height:34px;border-radius:var(--rsm);background:rgba(255,255,255,0.04);border:1px solid var(--b2);color:var(--mid);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;transition:all .15s;flex-shrink:0;}
+.bp-btn{width:34px;height:34px;border-radius:var(--rsm);background:rgba(255,255,255,0.04);border:1px solid var(--b2);color:var(--mid);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0;}
 .bp-btn:active{color:var(--white);background:rgba(255,255,255,0.1);}
 .bp-meta{font-size:12px;color:var(--dim);}
-.bp-body{display:flex;flex-direction:column;}
-@media(min-width:640px){.bp-body{display:grid;grid-template-columns:240px 1fr;}}
-.bp-cal{padding:14px 16px;border-bottom:1px solid var(--b1);}
-@media(min-width:640px){.bp-cal{border-bottom:none;border-right:1px solid var(--b1);}}
-.cal-heads{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:4px;}
-.cal-dh{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);text-align:center;padding:4px 0;}
-.cal-row{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;margin-bottom:2px;}
-.cal-cell{aspect-ratio:1;border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:32px;transition:background .15s;}
-.cal-cell.has-bday{cursor:pointer;}
-.cal-cell.has-bday:active{background:rgba(0,200,245,0.12);}
-.cal-cell.today .cdn{background:var(--ice);color:#050D1A;border-radius:50%;width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-weight:700;}
-.cal-cell.selected{background:rgba(0,200,245,0.1);border:1px solid rgba(0,200,245,0.25);}
-.cal-cell.empty{opacity:0;pointer-events:none;}
-.cdn{font-size:11px;font-weight:500;color:var(--mid);line-height:1;margin-bottom:2px;}
-.cal-cell.has-bday .cdn{color:var(--white);font-weight:700;}
-.dots{display:flex;gap:2px;justify-content:center;}
-.dot{width:3px;height:3px;border-radius:50%;background:var(--ice);opacity:.7;}
-.bp-list{padding:10px 12px;overflow-y:auto;max-height:260px;display:flex;flex-direction:column;gap:4px;}
-@media(min-width:640px){.bp-list{max-height:280px;}}
-.bp-list::-webkit-scrollbar{width:2px;}
-.bp-list::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
-.pcard{display:flex;align-items:center;gap:10px;padding:10px 10px;border-radius:10px;border:1px solid transparent;transition:background .15s,border-color .15s;}
-.pcard:active{background:rgba(255,255,255,0.03);border-color:var(--b1);}
+.today-section{padding:14px 14px 8px;background:rgba(0,217,138,0.04);border-bottom:1px solid rgba(0,217,138,0.12);}
+.today-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.today-list{display:flex;flex-direction:column;gap:6px;}
+.pcard{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:11px;border:1px solid transparent;transition:background .15s;}
+.pcard:active{background:rgba(255,255,255,0.03);}
 .pcard.highlighted{background:rgba(0,200,245,0.05);border-color:rgba(0,200,245,0.2);}
-.pav{width:36px;height:36px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:12px;font-weight:700;border:1px solid;}
+.pcard.today-card{background:rgba(0,217,138,0.07);border:1px solid rgba(0,217,138,0.2);border-radius:11px;}
+.pav{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:700;border:1.5px solid;}
 .pinfo{flex:1;min-width:0;}
-.pname{font-size:13px;font-weight:500;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.pdate{font-size:11px;color:var(--dim);margin-top:1px;}
-.badge{flex-shrink:0;padding:4px 8px;border-radius:7px;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
-.tbadge{background:rgba(0,217,138,0.1);color:var(--green);border:1px solid rgba(0,217,138,0.25);}
+.pname{font-size:14px;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.pdate{font-size:11px;color:var(--dim);margin-top:2px;}
+.badge{flex-shrink:0;padding:5px 9px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
+.tbadge{background:rgba(0,217,138,0.12);color:var(--green);border:1px solid rgba(0,217,138,0.3);}
 .ubadge{background:rgba(0,200,245,0.08);color:var(--ice);border:1px solid rgba(0,200,245,0.2);}
 .pbadge{background:rgba(255,255,255,0.04);color:var(--dim);border:1px solid var(--b1);}
-.bp-footer{padding:10px 18px;border-top:1px solid var(--b1);display:flex;align-items:center;justify-content:space-between;}
+.bp-list{padding:8px 14px 4px;overflow-y:auto;max-height:320px;display:flex;flex-direction:column;gap:2px;}
+.bp-list::-webkit-scrollbar{width:2px;}
+.bp-list::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
+.bp-footer{padding:10px 18px;border-top:1px solid var(--b1);}
 .bp-total{font-size:12px;color:var(--dim);}
-.btn-manage{padding:8px 14px;border-radius:var(--rsm);background:transparent;border:1px dashed var(--b2);color:var(--dim);font-size:11px;cursor:pointer;display:flex;align-items:center;gap:5px;transition:all .15s;}
-.btn-manage:active{color:var(--mid);border-color:rgba(255,255,255,0.2);}
 
 /* ── CONTACTS ── */
 .contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
@@ -324,12 +308,8 @@ body{
           </div>
           <div class="bp-meta">17 cumpleaños</div>
         </div>
-        <div class="bp-body">
-          <div class="bp-cal">
-            <div class="cal-heads"><div class="cal-dh">Lu</div><div class="cal-dh">Ma</div><div class="cal-dh">Mi</div><div class="cal-dh">Ju</div><div class="cal-dh">Vi</div><div class="cal-dh">Sa</div><div class="cal-dh">Do</div></div>
-            <div class="cal-row"><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell has-bday" onclick="selectDay(1)"><span class="cdn">1</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(2)"><span class="cdn">2</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">3</span></div></div><div class="cal-row"><div class="cal-cell has-bday" onclick="selectDay(4)"><span class="cdn">4</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(5)"><span class="cdn">5</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(6)"><span class="cdn">6</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">7</span></div><div class="cal-cell has-bday" onclick="selectDay(8)"><span class="cdn">8</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(9)"><span class="cdn">9</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">10</span></div></div><div class="cal-row"><div class="cal-cell" ><span class="cdn">11</span></div><div class="cal-cell" ><span class="cdn">12</span></div><div class="cal-cell" ><span class="cdn">13</span></div><div class="cal-cell" ><span class="cdn">14</span></div><div class="cal-cell today" ><span class="cdn">15</span></div><div class="cal-cell" ><span class="cdn">16</span></div><div class="cal-cell" ><span class="cdn">17</span></div></div><div class="cal-row"><div class="cal-cell" ><span class="cdn">18</span></div><div class="cal-cell" ><span class="cdn">19</span></div><div class="cal-cell" ><span class="cdn">20</span></div><div class="cal-cell has-bday" onclick="selectDay(21)"><span class="cdn">21</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">22</span></div><div class="cal-cell" ><span class="cdn">23</span></div><div class="cal-cell" ><span class="cdn">24</span></div></div><div class="cal-row"><div class="cal-cell" ><span class="cdn">25</span></div><div class="cal-cell" ><span class="cdn">26</span></div><div class="cal-cell has-bday" onclick="selectDay(27)"><span class="cdn">27</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(28)"><span class="cdn">28</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(29)"><span class="cdn">29</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">30</span></div><div class="cal-cell has-bday" onclick="selectDay(31)"><span class="cdn">31</span><div class="dots"><span class=dot></span><span class=dot></span></div></div></div>
-          </div>
-          <div class="bp-list">
+        
+        <div class="bp-list">
 <div class="pcard" data-day="1"><div class="pav" style="background:rgba(0,200,245,0.15);border-color:rgba(0,200,245,0.4);color:#00C8F5">PD</div><div class="pinfo"><div class="pname">Pablo Daniel Perri</div><div class="pdate">1 de mayo</div></div><span class="badge pbadge">1 May</span></div>
 <div class="pcard" data-day="2"><div class="pav" style="background:rgba(130,80,255,0.15);border-color:rgba(130,80,255,0.4);color:#9B6FFF">LR</div><div class="pinfo"><div class="pname">Leonardo René Aspra</div><div class="pdate">2 de mayo</div></div><span class="badge pbadge">2 May</span></div>
 <div class="pcard" data-day="4"><div class="pav" style="background:rgba(0,217,138,0.15);border-color:rgba(0,217,138,0.4);color:#00D98A">CN</div><div class="pinfo"><div class="pname">Cecilia Norma Yaunguizian</div><div class="pdate">4 de mayo</div></div><span class="badge pbadge">4 May</span></div>
@@ -347,56 +327,13 @@ body{
 <div class="pcard" data-day="29"><div class="pav" style="background:rgba(0,217,138,0.15);border-color:rgba(0,217,138,0.4);color:#00D98A">RM</div><div class="pinfo"><div class="pname">Roberto Maximo Martinez</div><div class="pdate">29 de mayo</div></div><span class="badge ubadge">en 14d</span></div>
 <div class="pcard" data-day="31"><div class="pav" style="background:rgba(255,120,80,0.15);border-color:rgba(255,120,80,0.4);color:#FF7850">JG</div><div class="pinfo"><div class="pname">Jonathan Gastón Rossi</div><div class="pdate">31 de mayo</div></div><span class="badge ubadge">en 16d</span></div>
 <div class="pcard" data-day="31"><div class="pav" style="background:rgba(255,168,32,0.15);border-color:rgba(255,168,32,0.4);color:#F5A820">LR</div><div class="pinfo"><div class="pname">Leonardo Raul Zaracho</div><div class="pdate">31 de mayo</div></div><span class="badge ubadge">en 16d</span></div>
-          </div>
         </div>
         <div class="bp-footer">
           <span class="bp-total">108 empleados en total</span>
-          <button class="btn-manage">＋ Gestionar</button>
         </div>
       </div>
     </div>
 
-    <div class="section" id="sec-contactos">
-      <div class="sec-label">Contactos útiles</div>
-      <div class="contacts-grid">
-        <div class="contact-card">
-          <div class="contact-av" style="background:rgba(0,200,245,0.12);border-color:rgba(0,200,245,0.3);color:#00C8F5;">RH</div>
-          <div class="contact-role">Recursos Humanos</div>
-          <div class="contact-name">RRHH Arena</div>
-          <div class="contact-actions">
-            <a href="https://wa.me/5491100000001" class="contact-btn wa">WhatsApp</a>
-            <a href="tel:+5491100000001" class="contact-btn tel">Llamar</a>
-          </div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-av" style="background:rgba(255,168,32,0.12);border-color:rgba(255,168,32,0.3);color:#F5A820;">SE</div>
-          <div class="contact-role">Seguridad</div>
-          <div class="contact-name">Central de Seguridad</div>
-          <div class="contact-actions">
-            <a href="https://wa.me/5491100000002" class="contact-btn wa">WhatsApp</a>
-            <a href="tel:+5491100000002" class="contact-btn tel">Llamar</a>
-          </div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-av" style="background:rgba(0,217,138,0.12);border-color:rgba(0,217,138,0.3);color:#00D98A;">AD</div>
-          <div class="contact-role">Administración</div>
-          <div class="contact-name">Admin Arena</div>
-          <div class="contact-actions">
-            <a href="https://wa.me/5491100000003" class="contact-btn wa">WhatsApp</a>
-            <a href="tel:+5491100000003" class="contact-btn tel">Llamar</a>
-          </div>
-        </div>
-        <div class="contact-card">
-          <div class="contact-av" style="background:rgba(180,80,255,0.12);border-color:rgba(180,80,255,0.3);color:#C060FF;">IT</div>
-          <div class="contact-role">Sistemas / IT</div>
-          <div class="contact-name">Soporte Técnico</div>
-          <div class="contact-actions">
-            <a href="https://wa.me/5491100000004" class="contact-btn wa">WhatsApp</a>
-            <a href="tel:+5491100000004" class="contact-btn tel">Llamar</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 </div>
@@ -414,10 +351,6 @@ body{
   <div class="nav-item" id="nav-cumple" onclick="navTo('sec-cumple','nav-cumple')">
     <div class="nav-icon">🎂</div>
     <div class="nav-label">Equipo</div>
-  </div>
-  <div class="nav-item" id="nav-contactos" onclick="navTo('sec-contactos','nav-contactos')">
-    <div class="nav-icon">📞</div>
-    <div class="nav-label">Contactos</div>
   </div>
 </nav>
 
