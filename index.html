@@ -33,7 +33,7 @@
 body{
   background:var(--bg);color:var(--white);font-family:var(--fb);font-size:15px;
   min-height:100vh;
-  padding-bottom:calc(72px + env(safe-area-inset-bottom,0px));
+  padding-bottom:env(safe-area-inset-bottom,24px);
   position:relative;overflow-x:hidden;
 }
 
@@ -110,33 +110,72 @@ body{
 .btn-firmar:active{opacity:.85;}
 
 /* ── BIRTHDAY PANEL ── */
-.bday-panel{background:rgba(8,18,36,0.82);border:1px solid var(--b1);border-radius:var(--r);backdrop-filter:blur(22px);overflow:hidden;position:relative;}
-.bday-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.07),transparent);}
-.bp-header{display:flex;align-items:center;justify-content:space-between;padding:16px 18px 14px;border-bottom:1px solid var(--b1);}
-.bp-nav{display:flex;align-items:center;gap:10px;}
-.bp-month{font-family:var(--fd);font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--white);}
-.bp-btn{width:34px;height:34px;border-radius:var(--rsm);background:rgba(255,255,255,0.04);border:1px solid var(--b2);color:var(--mid);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;flex-shrink:0;}
-.bp-btn:active{color:var(--white);background:rgba(255,255,255,0.1);}
-.bp-meta{font-size:12px;color:var(--dim);}
-.today-section{padding:14px 14px 8px;background:rgba(0,217,138,0.04);border-bottom:1px solid rgba(0,217,138,0.12);}
-.today-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--green);margin-bottom:8px;}
+.bday-panel{background:rgba(8,18,36,0.85);border:1px solid var(--b1);border-radius:var(--r);backdrop-filter:blur(24px);overflow:hidden;position:relative;}
+.bday-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--ice),transparent);opacity:.18;}
+.bp-header{display:flex;align-items:center;justify-content:space-between;padding:18px 18px 16px;border-bottom:1px solid var(--b1);}
+.bp-nav{display:flex;align-items:center;gap:12px;}
+.bp-month{font-family:var(--fd);font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--white);}
+.bp-btn{width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.05);border:1px solid var(--b2);color:var(--mid);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;flex-shrink:0;}
+.bp-btn:active{color:var(--white);background:rgba(255,255,255,0.12);}
+.bp-meta{font-family:var(--fd);font-size:13px;font-weight:600;letter-spacing:1px;color:var(--dim);text-transform:uppercase;}
+
+/* ── CALENDAR ── */
+.bp-cal{padding:16px 18px 12px;border-bottom:1px solid var(--b1);}
+.cal-heads{display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:6px;}
+.cal-dh{font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--dim);text-align:center;padding:2px 0;}
+.cal-row{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;margin-bottom:3px;}
+.cal-cell{
+  aspect-ratio:1;border-radius:8px;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  min-height:36px;position:relative;transition:background .15s;
+}
+.cal-cell.has-bday{cursor:pointer;background:rgba(0,200,245,0.07);}
+.cal-cell.has-bday:active{background:rgba(0,200,245,0.16);}
+.cal-cell.today{background:rgba(0,200,245,0.12);}
+.cal-cell.today .cdn{
+  background:var(--ice);color:#050D1A;border-radius:50%;
+  width:24px;height:24px;display:flex;align-items:center;justify-content:center;
+  font-weight:800;font-size:12px;
+}
+.cal-cell.has-bday.today{background:rgba(0,200,245,0.15);}
+.cal-cell.selected{background:rgba(0,200,245,0.14);outline:1px solid rgba(0,200,245,0.35);}
+.cal-cell.empty{opacity:0;pointer-events:none;}
+.cdn{font-size:12px;font-weight:500;color:var(--mid);line-height:1;}
+.cal-cell.has-bday .cdn{color:var(--ice);font-weight:700;}
+.dots{display:flex;gap:2px;justify-content:center;margin-top:2px;}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--ice);opacity:.8;}
+
+/* ── TODAY HIGHLIGHT ── */
+.today-section{padding:14px 18px 10px;background:rgba(0,217,138,0.045);border-bottom:1px solid rgba(0,217,138,0.1);}
+.today-label{font-size:9px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--green);margin-bottom:10px;}
 .today-list{display:flex;flex-direction:column;gap:6px;}
-.pcard{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:11px;border:1px solid transparent;transition:background .15s;}
+
+/* ── PERSON CARDS ── */
+.pcard{display:flex;align-items:center;gap:13px;padding:11px 18px;border-radius:0;border-bottom:1px solid rgba(255,255,255,0.04);transition:background .15s;}
+.pcard:last-child{border-bottom:none;}
 .pcard:active{background:rgba(255,255,255,0.03);}
-.pcard.highlighted{background:rgba(0,200,245,0.05);border-color:rgba(0,200,245,0.2);}
-.pcard.today-card{background:rgba(0,217,138,0.07);border:1px solid rgba(0,217,138,0.2);border-radius:11px;}
-.pav{width:42px;height:42px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:14px;font-weight:700;border:1.5px solid;}
+.pcard.highlighted{background:rgba(0,200,245,0.05);}
+.pcard.today-card{
+  padding:12px 14px;margin:0;
+  background:rgba(0,217,138,0.07);border:1px solid rgba(0,217,138,0.2);
+  border-radius:11px;
+}
+.pav{
+  width:40px;height:40px;border-radius:50%;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--fd);font-size:14px;font-weight:700;border:1.5px solid;
+}
 .pinfo{flex:1;min-width:0;}
 .pname{font-size:14px;font-weight:600;color:var(--white);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .pdate{font-size:11px;color:var(--dim);margin-top:2px;}
-.badge{flex-shrink:0;padding:5px 9px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
+.badge{flex-shrink:0;padding:4px 9px;border-radius:8px;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;}
 .tbadge{background:rgba(0,217,138,0.12);color:var(--green);border:1px solid rgba(0,217,138,0.3);}
 .ubadge{background:rgba(0,200,245,0.08);color:var(--ice);border:1px solid rgba(0,200,245,0.2);}
 .pbadge{background:rgba(255,255,255,0.04);color:var(--dim);border:1px solid var(--b1);}
-.bp-list{padding:8px 14px 4px;overflow-y:auto;max-height:320px;display:flex;flex-direction:column;gap:2px;}
+.bp-list{overflow-y:auto;max-height:300px;display:flex;flex-direction:column;}
 .bp-list::-webkit-scrollbar{width:2px;}
 .bp-list::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
-.bp-footer{padding:10px 18px;border-top:1px solid var(--b1);}
+.bp-footer{padding:11px 18px;border-top:1px solid var(--b1);}
 .bp-total{font-size:12px;color:var(--dim);}
 
 /* ── CONTACTS ── */
@@ -153,23 +192,6 @@ body{
 .contact-btn.tel{border-color:rgba(0,200,245,0.3);color:rgba(0,200,245,0.8);}
 .contact-btn:active{opacity:.7;}
 
-/* ── BOTTOM NAV ── */
-.bottom-nav{
-  position:fixed;bottom:0;left:0;right:0;z-index:55;
-  background:rgba(6,14,28,0.97);backdrop-filter:blur(24px);
-  border-top:1px solid var(--b1);
-  display:flex;
-  padding-bottom:env(safe-area-inset-bottom,0px);
-}
-.nav-item{
-  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:10px 0 8px;cursor:pointer;gap:4px;
-  -webkit-tap-highlight-color:transparent;transition:opacity .15s;
-}
-.nav-icon{font-size:22px;line-height:1;}
-.nav-label{font-size:10px;font-weight:600;letter-spacing:.2px;color:var(--dim);transition:color .15s;}
-.nav-item.active .nav-label{color:var(--ice);}
-.nav-item.active .nav-icon{filter:drop-shadow(0 0 6px rgba(0,200,245,0.6));}
 
 /* ── MODAL ── */
 .modal-overlay{position:fixed;inset:0;z-index:100;background:rgba(3,8,18,0.92);backdrop-filter:blur(14px);display:none;align-items:flex-end;justify-content:center;padding:0;}
@@ -199,7 +221,7 @@ body{
 .modal-cta{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:15px;border-radius:var(--rsm);background:var(--ice);color:#050D1A;font-family:var(--fb);font-size:15px;font-weight:700;border:none;cursor:pointer;box-shadow:0 4px 24px rgba(0,200,245,0.25);text-decoration:none;}
 
 /* ── TOAST ── */
-.toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(0,217,138,0.12);border:1px solid rgba(0,217,138,0.3);border-radius:24px;padding:10px 20px;font-size:14px;font-weight:600;color:var(--green);z-index:200;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;white-space:nowrap;backdrop-filter:blur(12px);}
+.toast{position:fixed;bottom:32px;left:50%;transform:translateX(-50%) translateY(12px);background:rgba(0,217,138,0.12);border:1px solid rgba(0,217,138,0.3);border-radius:24px;padding:10px 20px;font-size:14px;font-weight:600;color:var(--green);z-index:200;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;white-space:nowrap;backdrop-filter:blur(12px);}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 </style>
 </head>
@@ -308,6 +330,10 @@ body{
           </div>
           <div class="bp-meta">17 cumpleaños</div>
         </div>
+        <div class="bp-cal">
+          <div class="cal-heads"><div class="cal-dh">Lu</div><div class="cal-dh">Ma</div><div class="cal-dh">Mi</div><div class="cal-dh">Ju</div><div class="cal-dh">Vi</div><div class="cal-dh">Sa</div><div class="cal-dh">Do</div></div>
+          <div class="cal-row"><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell empty"></div><div class="cal-cell has-bday" onclick="selectDay(1)"><span class="cdn">1</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(2)"><span class="cdn">2</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">3</span></div></div><div class="cal-row"><div class="cal-cell has-bday" onclick="selectDay(4)"><span class="cdn">4</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(5)"><span class="cdn">5</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(6)"><span class="cdn">6</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">7</span></div><div class="cal-cell has-bday" onclick="selectDay(8)"><span class="cdn">8</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(9)"><span class="cdn">9</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">10</span></div></div><div class="cal-row"><div class="cal-cell" ><span class="cdn">11</span></div><div class="cal-cell" ><span class="cdn">12</span></div><div class="cal-cell" ><span class="cdn">13</span></div><div class="cal-cell" ><span class="cdn">14</span></div><div class="cal-cell today" ><span class="cdn">15</span></div><div class="cal-cell" ><span class="cdn">16</span></div><div class="cal-cell" ><span class="cdn">17</span></div></div><div class="cal-row"><div class="cal-cell" ><span class="cdn">18</span></div><div class="cal-cell" ><span class="cdn">19</span></div><div class="cal-cell" ><span class="cdn">20</span></div><div class="cal-cell has-bday" onclick="selectDay(21)"><span class="cdn">21</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">22</span></div><div class="cal-cell" ><span class="cdn">23</span></div><div class="cal-cell" ><span class="cdn">24</span></div></div><div class="cal-row"><div class="cal-cell" ><span class="cdn">25</span></div><div class="cal-cell" ><span class="cdn">26</span></div><div class="cal-cell has-bday" onclick="selectDay(27)"><span class="cdn">27</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(28)"><span class="cdn">28</span><div class="dots"><span class=dot></span><span class=dot></span></div></div><div class="cal-cell has-bday" onclick="selectDay(29)"><span class="cdn">29</span><div class="dots"><span class=dot></span></div></div><div class="cal-cell" ><span class="cdn">30</span></div><div class="cal-cell has-bday" onclick="selectDay(31)"><span class="cdn">31</span><div class="dots"><span class=dot></span><span class=dot></span></div></div></div>
+        </div>
         
         <div class="bp-list">
 <div class="pcard" data-day="1"><div class="pav" style="background:rgba(0,200,245,0.15);border-color:rgba(0,200,245,0.4);color:#00C8F5">PD</div><div class="pinfo"><div class="pname">Pablo Daniel Perri</div><div class="pdate">1 de mayo</div></div><span class="badge pbadge">1 May</span></div>
@@ -338,21 +364,6 @@ body{
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
-<nav class="bottom-nav">
-  <div class="nav-item active" id="nav-beneficios" onclick="navTo('sec-beneficios','nav-beneficios')">
-    <div class="nav-icon">🎁</div>
-    <div class="nav-label">Beneficios</div>
-  </div>
-  <div class="nav-item" id="nav-recibo" onclick="navTo('sec-recibo','nav-recibo')">
-    <div class="nav-icon">📄</div>
-    <div class="nav-label">Recibo</div>
-  </div>
-  <div class="nav-item" id="nav-cumple" onclick="navTo('sec-cumple','nav-cumple')">
-    <div class="nav-icon">🎂</div>
-    <div class="nav-label">Equipo</div>
-  </div>
-</nav>
 
 <script>
 // ── Particle network background ──
@@ -477,14 +488,6 @@ function copyCode(el) {
     document.execCommand('copy'); document.body.removeChild(ta);
     showToast('✓ Copiado: ' + text);
   }
-}
-
-// ── Bottom nav ──
-function navTo(sectionId, navId) {
-  document.querySelectorAll('.nav-item').forEach(function(n) { n.classList.remove('active'); });
-  document.getElementById(navId).classList.add('active');
-  var el = document.getElementById(sectionId);
-  if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
 }
 
 // ── Birthday calendar ──
