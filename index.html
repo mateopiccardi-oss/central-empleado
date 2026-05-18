@@ -57,12 +57,28 @@ body{
 
 /* ── LAYOUT ── */
 .z{position:relative;z-index:1;}
-.page-hero{text-align:center;padding:80px 20px 40px;}
+.page-hero{text-align:center;padding:70px 20px 20px;}
 .page-hero h1{
   font-family:var(--fd);font-size:clamp(32px,9vw,52px);font-weight:800;
   letter-spacing:2px;text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:6px;
 }
 .page-hero p{font-size:14px;color:var(--mid);font-weight:300;letter-spacing:.3px;}
+.scroll-cue{margin-top:28px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.scroll-cue-sections{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:rgba(0,200,245,0.45);}
+.scroll-cue-arrows{display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:2px;}
+.scroll-cue-arrows span{
+  display:block;width:10px;height:10px;
+  border-right:2px solid rgba(0,200,245,0.55);
+  border-bottom:2px solid rgba(0,200,245,0.55);
+  transform:rotate(45deg);
+  animation:cue-pulse 1.5s ease-in-out infinite;
+}
+.scroll-cue-arrows span:nth-child(2){animation-delay:.2s;opacity:.6;}
+.scroll-cue-arrows span:nth-child(3){animation-delay:.4s;opacity:.3;}
+@keyframes cue-pulse{
+  0%,100%{transform:rotate(45deg) translate(0,0);}
+  50%{transform:rotate(45deg) translate(3px,3px);}
+}
 .wrap{max-width:900px;margin:0 auto;padding:0 16px;}
 @media(min-width:600px){.wrap{padding:0 28px;}}
 .sec-label{
@@ -287,6 +303,14 @@ body{
   <div class="page-hero">
     <h1>Central del<br>Empleado</h1>
     <p id="hero-date">· Movistar Arena</p>
+    <div class="scroll-cue">
+      <div class="scroll-cue-sections">Beneficios &nbsp;·&nbsp; Recibo &nbsp;·&nbsp; Cumpleaños</div>
+      <div class="scroll-cue-arrows">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
   </div>
 
   <div class="wrap">
