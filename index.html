@@ -204,6 +204,11 @@ body{
 .tbadge{background:rgba(0,217,138,0.12);color:var(--green);border:1px solid rgba(0,217,138,0.3);}
 .ubadge{background:rgba(0,200,245,0.08);color:var(--ice);border:1px solid rgba(0,200,245,0.2);}
 .pbadge{background:rgba(255,255,255,0.04);color:var(--dim);border:1px solid var(--b1);}
+.pastbadge{background:transparent;color:var(--dim);border:1px solid rgba(255,255,255,0.04);opacity:.5;}
+.pcard.past{opacity:.55;}
+.day-detail{padding:12px 18px 10px;background:rgba(0,200,245,0.05);border-bottom:1px solid rgba(0,200,245,0.12);display:none;}
+.day-detail.visible{display:block;}
+.day-detail-date{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--ice);margin-bottom:8px;}
 .upcoming-header{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 18px 10px;border-top:1px solid var(--b1);
@@ -391,6 +396,7 @@ body{
           <div class="cal-heads"><div class="cal-dh">Lu</div><div class="cal-dh">Ma</div><div class="cal-dh">Mi</div><div class="cal-dh">Ju</div><div class="cal-dh">Vi</div><div class="cal-dh">Sa</div><div class="cal-dh">Do</div></div>
           <div id="cal-grid"></div>
         </div>
+        <div id="day-detail" class="day-detail"></div>
         <div id="today-section-container"></div>
         <div class="upcoming-header" id="upcoming-header"></div>
         <div class="bp-list" id="bp-list"></div>
@@ -581,25 +587,23 @@ function renderMonth(month, year) {
     todaySect.innerHTML = th + '</div></div>';
   } else { todaySect.innerHTML = ''; }
 
-  var upcoming = (month === TODAY_MONTH && year === TODAY_YEAR) ? pMonth.filter(function(p) { return p.day > TODAY_DAY; }) : pMonth.slice();
-  var moreCount = Math.max(0, upcoming.length - 7);
-  upcoming = upcoming.slice(0, 7);
-
-  document.getElementById('upcoming-header').innerHTML = '<span class="upcoming-label">Próximos cumpleaños</span><span class="upcoming-count">' + upcoming.length + ' este mes</span>';
+  document.getElementById('upcoming-header').innerHTML = '<span class="upcoming-label">Este mes</span><span class="upcoming-count">' + pMonth.length + ' cumpleaños</span>';
 
   var listHtml = '';
-  upcoming.forEach(function(p, i) {
-    var daysLeft = p.day - TODAY_DAY;
-    var badge = (month === TODAY_MONTH && year === TODAY_YEAR)
-      ? '<span class="badge ubadge">en ' + daysLeft + 'd</span>'
-      : '<span class="badge pbadge">' + p.day + ' ' + MONTHS_ES[p.month-1].substring(0,3) + '</span>';
-    listHtml += '<div class="pcard" data-day="' + p.day + '"><div class="pav" style="background:' + CAL_COLORS[i%6] + ';border-color:' + CAL_BORDERS[i%6] + ';color:' + CAL_TEXTS[i%6] + '">' + p.initials + '</div><div class="pinfo"><div class="pname">' + p.name + '</div><div class="pdate">' + p.day + ' de ' + MONTHS_ES[p.month-1].toLowerCase() + '</div></div>' + badge + '</div>';
+  pMonth.forEach(function(p, i) {
+    var isPast = month === TODAY_MONTH && year === TODAY_YEAR && p.day < TODAY_DAY;
+    var isToday2 = month === TODAY_MONTH && year === TODAY_YEAR && p.day === TODAY_DAY;
+    var badge = isToday2
+      ? '<span class="badge tbadge">🎉 Hoy</span>'
+      : isPast
+        ? '<span class="badge pastbadge">' + p.day + ' ' + MONTHS_ES[p.month-1].substring(0,3) + '</span>'
+        : month === TODAY_MONTH && year === TODAY_YEAR
+          ? '<span class="badge ubadge">en ' + (p.day - TODAY_DAY) + 'd</span>'
+          : '<span class="badge pbadge">' + p.day + ' ' + MONTHS_ES[p.month-1].substring(0,3) + '</span>';
+    listHtml += '<div class="pcard' + (isPast ? ' past' : '') + '" data-day="' + p.day + '"><div class="pav" style="background:' + CAL_COLORS[i%6] + ';border-color:' + CAL_BORDERS[i%6] + ';color:' + CAL_TEXTS[i%6] + '">' + p.initials + '</div><div class="pinfo"><div class="pname">' + p.name + '</div><div class="pdate">' + p.day + ' de ' + MONTHS_ES[p.month-1].toLowerCase() + '</div></div>' + badge + '</div>';
   });
   document.getElementById('bp-list').innerHTML = listHtml;
-
-  var footerText = '108 empleados en total';
-  if (moreCount > 0) footerText = '+' + moreCount + ' más en ' + MONTHS_ES[month-1].toLowerCase() + ' · ' + footerText;
-  document.getElementById('bp-footer').innerHTML = '<span class="bp-total">' + footerText + '</span>';
+  document.getElementById('bp-footer').innerHTML = '<span class="bp-total">' + ALL_PEOPLE.length + ' empleados en total</span>';
 }
 
 function prevMonth() {
@@ -653,6 +657,20 @@ function selectDay(day) {
     var n = c.querySelector('.cdn');
     if (n && parseInt(n.textContent) === day) c.classList.add('selected');
   });
+
+  var people = ALL_PEOPLE.filter(function(p) { return p.month === curMonth && p.day === day; });
+  var detail = document.getElementById('day-detail');
+  if (people.length > 0) {
+    var html = '<div class="day-detail-date">' + day + ' de ' + MONTHS_ES[curMonth-1].toLowerCase() + '</div>';
+    people.forEach(function(p, i) {
+      html += '<div class="pcard today-card" style="margin-bottom:' + (i < people.length-1 ? '6px' : '0') + '"><div class="pav" style="background:' + CAL_COLORS[i%6] + ';border-color:' + CAL_BORDERS[i%6] + ';color:' + CAL_TEXTS[i%6] + '">' + p.initials + '</div><div class="pinfo"><div class="pname">' + p.name + '</div></div></div>';
+    });
+    detail.innerHTML = html;
+    detail.classList.add('visible');
+  } else {
+    detail.classList.remove('visible');
+  }
+
   document.querySelectorAll('.pcard[data-day="' + day + '"]').forEach(function(c) {
     c.classList.add('highlighted');
     c.scrollIntoView({behavior: 'smooth', block: 'nearest'});
