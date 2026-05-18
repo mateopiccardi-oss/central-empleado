@@ -57,7 +57,7 @@ body{
 
 /* ── LAYOUT ── */
 .z{position:relative;z-index:1;}
-.page-hero{text-align:center;padding:80px 20px 28px;}
+.page-hero{text-align:center;padding:80px 20px 40px;}
 .page-hero h1{
   font-family:var(--fd);font-size:clamp(32px,9vw,52px);font-weight:800;
   letter-spacing:2px;text-transform:uppercase;color:var(--white);line-height:1;margin-bottom:6px;
@@ -67,11 +67,27 @@ body{
 @media(min-width:600px){.wrap{padding:0 28px;}}
 .sec-label{
   font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;
-  color:var(--dim);margin-bottom:14px;
+  color:var(--dim);margin-bottom:18px;
   display:flex;align-items:center;gap:12px;
 }
-.sec-label::after{content:'';flex:1;height:1px;background:var(--b1);}
-.section{margin-bottom:36px;}
+.sec-label::after{
+  content:'';flex:1;height:1px;
+  background:var(--ice);opacity:.45;
+  box-shadow:0 0 6px rgba(0,200,245,0.35);
+}
+.section{margin-bottom:56px;position:relative;}
+.section::after{
+  content:'';display:block;height:1px;margin-top:40px;
+  background:var(--ice);opacity:.45;
+  box-shadow:0 0 6px rgba(0,200,245,0.35);
+}
+/* ── GESTIÓN section ── */
+#sec-recibo{
+  background:rgba(245,168,32,0.04);
+  border:1px solid rgba(245,168,32,0.14);
+  border-radius:18px;
+  padding:22px 18px 18px;
+}
 
 /* ── BENEFITS LIST ── */
 .ben-list{display:flex;flex-direction:column;gap:10px;}
@@ -98,7 +114,7 @@ body{
 .ben-tile:active .ben-arrow{opacity:1;}
 
 /* ── RECIBO ── */
-.recibo{background:rgba(8,18,36,0.82);border:1px solid var(--b1);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:16px;backdrop-filter:blur(22px);position:relative;overflow:hidden;margin-bottom:12px;}
+.recibo{background:rgba(8,18,36,0.82);border:1px solid var(--b1);border-radius:var(--r);padding:20px;display:flex;flex-direction:column;gap:16px;backdrop-filter:blur(22px);position:relative;overflow:hidden;margin-bottom:28px;}
 @media(min-width:600px){.recibo{flex-direction:row;align-items:center;padding:24px 28px;}}
 .recibo::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,var(--ice),transparent 50%);opacity:.35;}
 .rec-left{display:flex;align-items:center;gap:16px;flex:1;}
@@ -129,21 +145,21 @@ body{
   align-items:center;justify-content:center;
   min-height:36px;position:relative;transition:background .15s;
 }
-.cal-cell.has-bday{cursor:pointer;background:rgba(0,200,245,0.07);}
-.cal-cell.has-bday:active{background:rgba(0,200,245,0.16);}
+.cal-cell.has-bday{cursor:pointer;background:rgba(0,217,138,0.08);}
+.cal-cell.has-bday:active{background:rgba(0,217,138,0.18);}
 .cal-cell.today{background:rgba(0,200,245,0.12);}
 .cal-cell.today .cdn{
   background:var(--ice);color:#050D1A;border-radius:50%;
   width:24px;height:24px;display:flex;align-items:center;justify-content:center;
   font-weight:800;font-size:12px;
 }
-.cal-cell.has-bday.today{background:rgba(0,200,245,0.15);}
-.cal-cell.selected{background:rgba(0,200,245,0.14);outline:1px solid rgba(0,200,245,0.35);}
+.cal-cell.has-bday.today{background:rgba(0,200,245,0.14);}
+.cal-cell.selected{background:rgba(0,217,138,0.14);outline:1px solid rgba(0,217,138,0.4);}
 .cal-cell.empty{opacity:0;pointer-events:none;}
 .cdn{font-size:12px;font-weight:500;color:var(--mid);line-height:1;}
-.cal-cell.has-bday .cdn{color:var(--ice);font-weight:700;}
+.cal-cell.has-bday .cdn{color:var(--green);font-weight:700;}
 .dots{display:flex;gap:2px;justify-content:center;margin-top:2px;}
-.dot{width:3px;height:3px;border-radius:50%;background:var(--ice);opacity:.8;}
+.dot{width:3px;height:3px;border-radius:50%;background:var(--green);opacity:.8;}
 
 /* ── TODAY HIGHLIGHT ── */
 .today-section{padding:14px 18px 10px;background:rgba(0,217,138,0.045);border-bottom:1px solid rgba(0,217,138,0.1);}
@@ -183,6 +199,12 @@ body{
 .bp-list::-webkit-scrollbar-thumb{background:var(--b2);border-radius:2px;}
 .bp-footer{padding:11px 18px;border-top:1px solid var(--b1);}
 .bp-total{font-size:12px;color:var(--dim);}
+.bp-search{padding:10px 18px;border-bottom:1px solid var(--b1);position:relative;}
+.bp-search-icon{position:absolute;left:30px;top:50%;transform:translateY(-50%);color:var(--dim);font-size:13px;pointer-events:none;}
+.bp-search input{width:100%;background:rgba(255,255,255,0.04);border:1px solid var(--b2);border-radius:8px;padding:9px 12px 9px 34px;color:var(--white);font-family:var(--fb);font-size:13px;outline:none;transition:border-color .2s;}
+.bp-search input::placeholder{color:var(--dim);}
+.bp-search input:focus{border-color:rgba(0,200,245,0.4);}
+.bday-divider{height:1px;background:var(--ice);opacity:.45;box-shadow:0 0 6px rgba(0,200,245,0.35);margin:0 0 20px;}
 
 /* ── CONTACTS ── */
 .contacts-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
@@ -264,7 +286,7 @@ body{
 <div class="z">
   <div class="page-hero">
     <h1>Central del<br>Empleado</h1>
-    <p>Jueves 15 de mayo · Movistar Arena</p>
+    <p id="hero-date">· Movistar Arena</p>
   </div>
 
   <div class="wrap">
@@ -327,6 +349,7 @@ body{
         </div>
         <a class="btn-firmar" href="https://movistararena.turecibo.com/e/login" target="_blank">✍&nbsp; Firmar recibo digital</a>
       </div>
+      <div class="bday-divider"></div>
       <div class="bday-panel" id="sec-cumple">
         <div class="bp-header">
           <div class="bp-nav">
@@ -336,7 +359,11 @@ body{
           </div>
           <div class="bp-meta" id="bp-meta-label"></div>
         </div>
-        <div class="bp-cal">
+        <div class="bp-search">
+          <span class="bp-search-icon">&#128269;</span>
+          <input type="text" id="bp-search-input" placeholder="Buscar por nombre..." oninput="searchPeople(this.value)">
+        </div>
+        <div class="bp-cal" id="bp-cal-section">
           <div class="cal-heads"><div class="cal-dh">Lu</div><div class="cal-dh">Ma</div><div class="cal-dh">Mi</div><div class="cal-dh">Ju</div><div class="cal-dh">Vi</div><div class="cal-dh">Sa</div><div class="cal-dh">Do</div></div>
           <div id="cal-grid"></div>
         </div>
@@ -483,8 +510,11 @@ var MONTHS_ES = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agost
 var CAL_COLORS = ['rgba(0,200,245,0.15)','rgba(130,80,255,0.15)','rgba(0,217,138,0.15)','rgba(255,120,80,0.15)','rgba(255,168,32,0.15)','rgba(180,80,255,0.15)'];
 var CAL_BORDERS = ['rgba(0,200,245,0.4)','rgba(130,80,255,0.4)','rgba(0,217,138,0.4)','rgba(255,120,80,0.4)','rgba(255,168,32,0.4)','rgba(180,80,255,0.4)'];
 var CAL_TEXTS = ['#00C8F5','#9B6FFF','#00D98A','#FF7850','#F5A820','#C060FF'];
-var TODAY_DAY = 15, TODAY_MONTH = 5, TODAY_YEAR = 2026;
-var curMonth = 5, curYear = 2026;
+var _today = new Date();
+var TODAY_DAY = _today.getDate(), TODAY_MONTH = _today.getMonth() + 1, TODAY_YEAR = _today.getFullYear();
+var curMonth = TODAY_MONTH, curYear = TODAY_YEAR;
+var DAYS_ES = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+document.getElementById('hero-date').textContent = DAYS_ES[_today.getDay()] + ' ' + TODAY_DAY + ' de ' + MONTHS_ES[TODAY_MONTH-1].toLowerCase() + ' · Movistar Arena';
 
 function getDaysInMonth(m, y) { return new Date(y, m, 0).getDate(); }
 function getFirstWeekday(m, y) { var d = new Date(y, m - 1, 1).getDay(); return (d + 6) % 7; }
@@ -558,6 +588,31 @@ function nextMonth() {
 }
 
 renderMonth(5, 2026);
+
+function searchPeople(query) {
+  query = query.trim().toLowerCase();
+  var calSection = document.getElementById('bp-cal-section');
+  var todaySect = document.getElementById('today-section-container');
+  var upcomingHeader = document.getElementById('upcoming-header');
+  if (!query) {
+    calSection.style.display = '';
+    renderMonth(curMonth, curYear);
+    return;
+  }
+  calSection.style.display = 'none';
+  todaySect.innerHTML = '';
+  var results = ALL_PEOPLE.filter(function(p) {
+    return p.name.toLowerCase().indexOf(query) !== -1;
+  }).sort(function(a,b) { return a.month !== b.month ? a.month - b.month : a.day - b.day; });
+  upcomingHeader.innerHTML = '<span class="upcoming-label">Resultados</span><span class="upcoming-count">' + results.length + ' encontrado' + (results.length !== 1 ? 's' : '') + '</span>';
+  var listHtml = '';
+  results.forEach(function(p, i) {
+    listHtml += '<div class="pcard"><div class="pav" style="background:' + CAL_COLORS[i%6] + ';border-color:' + CAL_BORDERS[i%6] + ';color:' + CAL_TEXTS[i%6] + '">' + p.initials + '</div><div class="pinfo"><div class="pname">' + p.name + '</div><div class="pdate">' + p.day + ' de ' + MONTHS_ES[p.month-1].toLowerCase() + '</div></div><span class="badge pbadge">' + MONTHS_ES[p.month-1].substring(0,3) + '</span></div>';
+  });
+  if (!listHtml) listHtml = '<div style="padding:20px 18px;font-size:13px;color:var(--dim)">Sin resultados para "' + query + '"</div>';
+  document.getElementById('bp-list').innerHTML = listHtml;
+  document.getElementById('bp-footer').innerHTML = '';
+}
 
 function selectDay(day) {
   document.querySelectorAll('.cal-cell').forEach(function(c) { c.classList.remove('selected'); });
