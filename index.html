@@ -625,15 +625,17 @@ function nextMonth() {
 var SHEETS_CSV = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQcYK0X3Uea4mLWIi1nrEyC34q4fiHbpfMKeDO7ngvlBgg8Eepo6ZlQPjyomKgrK6Kf0OMH9BlRq7hM/pub?output=csv';
 
 function parseCSV(text) {
-  return text.trim().split('\n').slice(1).map(function(line) {
-    var parts = line.split(',');
-    var name = parts[0].trim();
-    var day = parseInt(parts[1]);
-    var month = parseInt(parts[2]);
-    var words = name.split(' ').filter(Boolean);
-    var initials = words.length === 1 ? words[0].substring(0,2).toUpperCase() : (words[0][0] + words[1][0]).toUpperCase();
-    return { name: name, day: day, month: month, initials: initials };
-  }).filter(function(p) { return p.name && !isNaN(p.day) && !isNaN(p.month); });
+  return text.trim().split(/\r?\n/).slice(1)
+    .filter(function(line) { return line.trim(); })
+    .map(function(line) {
+      var parts = line.split(',');
+      var name = parts[0].trim();
+      var day = parseInt(parts[1]);
+      var month = parseInt(parts[2]);
+      var words = name.split(' ').filter(Boolean);
+      var initials = words.length >= 2 ? (words[0][0] + words[1][0]).toUpperCase() : words.length === 1 ? words[0].substring(0,2).toUpperCase() : '??';
+      return { name: name, day: day, month: month, initials: initials };
+    }).filter(function(p) { return p.name && !isNaN(p.day) && !isNaN(p.month); });
 }
 
 fetch(SHEETS_CSV)
